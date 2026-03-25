@@ -74,7 +74,7 @@ JavaScript y ECharts - visualización de datos
 
 ```bash
 git clone <https://github.com/jeissonjahvier10/data-netflix-dashboard.git>
-cd prueba_tecnica_nuptum/terraform
+
 ```
 ### 2. Inicializar Terraform
 ```bash
