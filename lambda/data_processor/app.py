@@ -5,24 +5,17 @@ import boto3
 from io import StringIO
 from collections import defaultdict
 
-# Cliente para conectarse a S3
 s3 = boto3.client("s3")
 
-# Variables de entorno que vienen desde Terraform
 DATA_BUCKET = os.environ["DATA_BUCKET"]
 CSV_KEY = os.environ["CSV_KEY"]
 
-# Archivos JSON que vamos a crear en S3
 KPIS_KEY = "processed/kpis.json"
 CHARTS_KEY = "processed/charts.json"
 FILTERS_KEY = "processed/filters.json"
 
 
 def safe_float(value):
-    """
-    Convierte un valor a número decimal.
-    Si falla, devuelve 0.
-    """
     try:
         return float(value)
     except:
@@ -30,10 +23,7 @@ def safe_float(value):
 
 
 def read_csv_from_s3():
-    """
-    Lee el archivo CSV desde S3 y lo convierte en una lista de filas.
-    Cada fila queda como un diccionario.
-    """
+
     response = s3.get_object(Bucket=DATA_BUCKET, Key=CSV_KEY)
     content = response["Body"].read().decode("utf-8")
     reader = csv.DictReader(StringIO(content))
@@ -41,18 +31,6 @@ def read_csv_from_s3():
 
 
 def process_data(rows):
-    """
-    Procesa las filas del CSV y construye:
-    - kpis
-    - charts
-    - filters
-
-    Columnas reales usadas:
-    - user_id
-    - favorite_genre
-    - avg_watch_time_minutes
-    - primary_device
-    """
 
     total_watch_time = 0
     watch_time_by_user = defaultdict(float)
@@ -111,9 +89,7 @@ def process_data(rows):
 
 
 def upload_json_to_s3(key, data):
-    """
-    Sube un archivo JSON a S3.
-    """
+
     s3.put_object(
         Bucket=DATA_BUCKET,
         Key=key,
@@ -123,9 +99,6 @@ def upload_json_to_s3(key, data):
 
 
 def main_handler(event, context):
-    """
-    Función principal de la Lambda.
-    """
     try:
         # 1. Leer el CSV
         rows = read_csv_from_s3()

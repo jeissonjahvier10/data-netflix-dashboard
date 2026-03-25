@@ -2,13 +2,10 @@ import json
 import os
 import boto3
 
-# Cliente para conectarse a S3
 s3 = boto3.client("s3")
 
-# Nombre del bucket, viene desde Terraform
 DATA_BUCKET = os.environ["DATA_BUCKET"]
 
-# Rutas de los archivos JSON en S3
 KPIS_KEY = "processed/kpis.json"
 CHARTS_KEY = "processed/charts.json"
 FILTERS_KEY = "processed/filters.json"
@@ -29,19 +26,14 @@ def build_response(status_code, body):
 
 
 def read_json_from_s3(key):
-    """
-    Lee un archivo JSON desde S3 y lo convierte a diccionario Python.
-    """
+
     response = s3.get_object(Bucket=DATA_BUCKET, Key=key)
     content = response["Body"].read().decode("utf-8")
     return json.loads(content)
 
 
 def main_handler(event, context):
-    """
-    Función principal de la Lambda.
-    Revisa la ruta pedida y devuelve el JSON correspondiente.
-    """
+    
     try:
         path = event.get("rawPath", "/")
 
