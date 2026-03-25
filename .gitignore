@@ -1,0 +1,28 @@
+# Archivos de estado (MUY importantes no subir)
+*.tfstate
+*.tfstate.*
+
+# Carpeta de dependencias
+.terraform/
+
+# Archivos de variables sensibles
+*.tfvars
+*.tfvars.json
+
+# Archivos de override
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Archivos de plan
+*.tfplan
+
+# Logs
+crash.log
+
+# Archivos de configuración local
+.terraform.lock.hcl
+
+# Archivos de entorno
+.env

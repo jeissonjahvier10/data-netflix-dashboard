@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard de Consumo Netflix</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div>
+        <h1>Dashboard comportamiento usuarios Netflix </h1>
+        <p></p>
+      </div>
+    </header>
+
+    <section class="filters-panel">
+      <div class="filter-group">
+        <label for="genreFilter">Filtrar por género</label>
+        <select id="genreFilter">
+          <option value="">Todos</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-label">Tiempo total de visualización</span>
+        <strong id="total-watch-time">Cargando...</strong>
+      </div>
+
+      <div class="kpi-card">
+        <span class="kpi-label">Promedio de visualización por Usuario</span>
+        <strong id="avg-watch-time">Cargando...</strong>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <div class="panel panel-wide">
+        <h2>Top 5 Géneros mas vistos</h2>
+        <ul id="top-genres" class="top-list">
+          <li>Cargando...</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h2>Distribución de Usuarios por Dispositivo</h2>
+        <div id="deviceChart" class="chart-box"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Distribución de usuarios por Género</h2>
+        <div id="genreChart" class="chart-box"></div>
+      </div>
+
+    </section>
+  </div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
